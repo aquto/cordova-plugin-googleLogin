@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+           id="com.aquto.cordova.GoogleLogin"
+      version="0.0.1">
+
+    <name>Google Login</name>
+
+    <description>
+        Allows users to login using native Google SDKs
+    </description>
+
+    <license>MIT</license>
+    <keywords>cordova,google,login</keywords>
+
+    <js-module src="www/GoogleLogin.js" name="GoogleLogin">
+        <clobbers target="window.plugins.GoogleLogin" />
+    </js-module>
+
+    <!-- ios -->
+    <platform name="ios">
+
+        <config-file target="config.xml" parent="/*">
+            <feature name="GoogleLogin">
+                <param name="ios-package" value="GoogleLogin" />
+            </feature>
+        </config-file>
+
+        <config-file target="*-Info.plist" parent="CFBundleURLTypes">
+          <array>
+            <dict>
+              <key>CFBundleURLSchemes</key>
+              <array>
+                <string>$PACKAGE_NAME</string>
+              </array>
+            </dict>
+          </array>
+        </config-file>
+
+        <framework src="AddressBook.framework" />
+        <framework src="AssetsLibrary.framework" />
+        <framework src="Foundation.framework" />
+        <framework src="CoreLocation.framework" />
+        <framework src="CoreMotion.framework" />
+        <framework src="CoreGraphics.framework" />
+        <framework src="CoreText.framework" />
+        <framework src="MediaPlayer.framework" />
+        <framework src="Security.framework" />
+        <framework src="SystemConfiguration.framework" />
+        <framework src="UIKit.framework" />
+
+        <framework src="src/ios/GoogleOpenSource.framework" custom="true" />
+        <framework src="src/ios/GooglePlus.framework" custom="true" />
+
+        <header-file src="src/ios/AppDelegate+googleLogin.h" />
+        <header-file src="src/ios/GoogleLogin.h" />
+
+        <source-file src="src/ios/AppDelegate+googleLogin.m" />
+        <source-file src="src/ios/GoogleLogin.m" />
+
+    </platform>
+
+
+    <!-- android -->
+    <platform name="android">
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <meta-data
+              android:name="com.google.android.gms.version"
+              android:value="@integer/google_play_services_version" />
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+            <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+            <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+        </config-file>
+
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="GoogleLogin">
+              <param name="android-package" value="com.plugin.GoogleLogin.GoogleLogin"/>
+            </feature>
+        </config-file>
+
+
+        <source-file src="src/android/GoogleLogin.java" target-dir="src/com/plugin/GoogleLogin" />
+
+    </platform>
+
+    <dependency id="com.google.playservices" url="https://github.com/MobileChromeApps/google-play-services" commit="master" />
+
+</plugin>
