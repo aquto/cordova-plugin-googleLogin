@@ -1,4 +1,4 @@
-cordova-plugin-IMEI
+cordova-plugin-googleLogin
 ======================
 To install this plugin, follow the [Command-line Interface Guide](http://cordova.apache.org/docs/en/edge/guide_cli_index.md.html#The%20Command-line%20Interface).
 
@@ -6,4 +6,4 @@ If you are not using the Cordova Command-line Interface, follow [Using Plugman t
 
 Exposes 1 methods:
 
-- __get__: returns IMEI as string
+- __login__: logs into google, returns access token
